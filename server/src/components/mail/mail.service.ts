@@ -6,7 +6,7 @@ const sendMail = (email: string, subject: string, content: string) => {
     service: "Outlook365",
     auth: {
       user: process.env.USER,
-      pass: process.env.PASS
+      pass: process.env.PASS,
     }
   });
   
@@ -18,9 +18,7 @@ const sendMail = (email: string, subject: string, content: string) => {
   };
   
   transporter.sendMail(mailOptions, (error: any, info: any) => {
-    if (error)
-      return console.log(error);
-  
+    if (error) return console.log(error);
     return console.log("Message sent: " + info.messageId);
   });
 

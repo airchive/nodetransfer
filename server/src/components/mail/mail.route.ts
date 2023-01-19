@@ -8,9 +8,7 @@ mailRouter
   .route("/")
 
   .all((req: any, res: any, next: any) => {
-    if (!availableRequestMethods.includes(req.method)) 
-      res.status(405).end();
-    
+    if (!availableRequestMethods.includes(req.method)) res.status(405).end();
     next();
   })
 
