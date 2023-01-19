@@ -8,17 +8,19 @@ export default class App extends React.Component<any, any> {
     this.state = {
       email: "",
       subject: "",
-      content: ""
+      content: "",
     }
   }
 
-  handleChange = (event: any) => {
+  handleChange = (
+    event: React.changeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     this.setState({
       [event.target.id]: event.target.value
     } as Pick<any, any>);
   }
 
-  handleSubmit = (event: any) => {
+  handleSubmit = (event: HTMLFormElement) => {
     event.preventDefault();
 
     const payload = {
@@ -30,64 +32,67 @@ export default class App extends React.Component<any, any> {
     fetch("http://localhost:666/mail", {
       method: "POST",
       body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
   }
 
   render() {
     return (
       <main className="app__form">
-      <form 
-        onSubmit={(event) => this.handleSubmit(event)}
-      >
-        <div>
-          <h1>Nodetransfer</h1>
-        </div>
+        <form
+          onSubmit={(event) => this.handleSubmit(event)}
+        >
+          <div>
+            <h1>Nodetransfer</h1>
+          </div>
 
-        <div>
-          <label>Email Address</label>
+          <div>
+            <label>Email Address</label>
+            <br/>
+
+            <input
+              id="email"
+              type="text"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
+
           <br/>
-          <input 
-            type="text" 
-            id="email"
-            value={this.state.email} 
-            onChange={this.handleChange} 
-          />
-        </div>
 
-        <br/>
+          <div>
+            <label>Mail Subject</label>
+            <br/>
 
-        <div>
-          <label>Mail Subject</label>
+            <input
+              type="text"
+              id="subject"
+              value={this.state.subject}
+              onChange={this.handleChange}
+            />
+          </div>
+
           <br/>
-          <input
-            type="text" 
-            id="subject"
-            value={this.state.subject} 
-            onChange={this.handleChange} 
-          />
-        </div>
 
-        <br/>
+          <div>
+            <label>Mail Content</label>
+            <br/>
 
-        <div>
-          <label>Mail Content</label>
+            <textarea
+              rows={7}
+              cols={21}
+              id="content"
+              value={this.state.content}
+              onChange={this.handleChange}
+            />
+          </div>
+
           <br/>
-          <textarea 
-            id="content"
-            cols={21}
-            rows={7}
-            value={this.state.content} 
-            onChange={this.handleChange} 
-          />
-        </div>
-
-        <br/>
-      
-        <div>
-          <button type="submit">Send</button>
-        </div>
-      </form>
+        
+          <div>
+            <button type="submit">Send</button>
+          </div>
+        </form>
       </main>
     )
   }
