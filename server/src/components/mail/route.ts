@@ -1,5 +1,5 @@
 import express from "express";
-import sendMail from "./mail.service";
+import sendMail from "./service";
 
 const mailRouter = express.Router();
 const availableRequestMethods = ["GET", "POST"];

@@ -7,7 +7,7 @@ import { Request } from "express";
 import { Response } from "express";
 import { NextFunction } from "express";
 
-import mailRouter from "./components/mail/mail.route";
+import mailRouter from "./components/mail/route";
 
 const app = express();
 const port = process.env.PORT || 666
